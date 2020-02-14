@@ -16,7 +16,7 @@ MLdir=`pwd`
 echo $MLdir
 
 #WFPLOT=$HOME/Projects/MachineLearning/WFplot/WFplot.GF
-WFPLOT=$HOME/Projects/MachineLearning/Anderson/WFplot/WFplot.GF
+WFPLOT=../WFplot/WFplot.GF
 #WFPLOT=/media/phsht/DataDrive/MachineLearning/Anderson/WFplot/WFplot.GF
 
 # copy the original data files
