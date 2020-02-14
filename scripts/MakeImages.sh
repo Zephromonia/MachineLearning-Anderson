@@ -16,7 +16,7 @@ MLdir=`pwd`
 echo $MLdir
 
 #WFPLOT=$HOME/Projects/MachineLearning/WFplot/WFplot.GF
-WFPLOT=../WFplot/WFplot.GF
+WFPLOT=$MLdir"/../WFplot/WFplot.GF"
 #WFPLOT=/media/phsht/DataDrive/MachineLearning/Anderson/WFplot/WFplot.GF
 
 # copy the original data files
@@ -34,7 +34,7 @@ do
     do
 	echo $dir
 	mkdir -p $MLdir/$disdir
-	cp $dir/Evec*.bz2 $MLdir/$disdir
+	cp -u $dir/Evec*.bz2 $MLdir/$disdir
     done
 
     #cd ..
