@@ -1,0 +1,62 @@
+#-----------------------------------------------------------------
+#
+# tmse2dCOE
+#
+#-----------------------------------------------------------------
+#
+# $Header: /home/cvs/phsht/WFplot/makefile.PG,v 1.2 2019/09/18 09:56:03 phsht Exp $
+#
+# $Log: makefile.PG,v $
+# Revision 1.2  2019/09/18 09:56:03  phsht
+# added maqkefile.GF to work with standard gfortran;
+# added FRAME input;
+# switched COLOR to 1 and B/W to 0
+#
+# Revision 1.1  2008/06/13 16:47:46  phsht
+# from tmse2dXCOE
+#
+#-----------------------------------------------------------------#
+
+F77 = pgf77
+F90 = pgf90
+
+#F77FLAGS = -C -g +u -Mr8 -Mdlines -Mextend -Mdclchk	# For debugging
+F77FLAGS = -O2 -tp p6 -Mr8 -Munroll -Mnoframe -Mdclchk -Mextend   # For optimizing
+#F77FLAGS = -xpg -C -Mr8 -Mprof		                # For profiling
+
+F90FLAGS = -C -g -Mr8 -Mdlines -Mextend -Mdclchk	# For debugging
+#F90FLAGS = -O2 -tp p6 -Mr8 -Munroll -Mnoframe -Mdclchk	# For optimizing
+#F90FLAGS = -fast -Mr8 -C -Mprof=lines			# For profiling
+
+CC = gcc
+CCFLAGS = -O2
+
+LIBDIR = $(HOME)/f77/lib
+LIBFLAGS  =  -llapack -lblas
+
+PRINT1 = a2ps -g -o-
+PRINT2 = > mcXdCOE.ps # | fleet -odouble
+
+WFplot.PG:    main.o util.o 
+	$(F90) $(F90FLAGS) -o WFplot.PG \
+		util.o main.o $(LIBFLAGS)
+
+main.o:     main.f90
+	$(F90) $(F90FLAGS) -c main.f90
+
+util.o:     util.f90
+	$(F90) $(F90FLAGS) -c util.f90
+
+tar:		WFplot.tar
+WFplot.tar:	makefile.* main.f90 util.f90 
+	tar -cvf WFplot.tar makefile.* main.f90 util.f90 
+
+print:  
+	$(PRINT1) *.f90 $(PRINT2)
+
+clean:
+	rm -f core *.mod *.o
+
+
+
+
