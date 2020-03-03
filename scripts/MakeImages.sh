@@ -9,8 +9,8 @@ imgsize=${6:-0}
 
 echo $size $nsamples $type
 
-#datadir="/media/phsht/DataDrive/AML3D_data"
-datadir="/mnt/md0/phsht/data/AML3D_data"
+datadir="/media/phsht/DataDrive/AML3D_data"
+#datadir="/mnt/md0/phsht/data/AML3D_data"
 MLdir=`pwd`
 
 echo $MLdir
@@ -34,7 +34,7 @@ do
     do
 	echo $dir
 	mkdir -p $MLdir/$disdir
-	cp -u $dir/Evec*.bz2 $MLdir/$disdir
+	cp -u --preserve=timestamps $dir/Evec*.bz2 $MLdir/$disdir
     done
 
     #cd ..
