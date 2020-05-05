@@ -9,14 +9,16 @@ imgsize=${6:-0}
 
 echo $size $nsamples $type
 
-datadir="/media/phsht/DataDrive/AML3D_data"
+#datadir="/media/phsht/DataDrive/AML3D_data"
+datadir="/storage/disqs/phsht/Archive-DATA/MULTIFRACTALS/AML3D_data"
 #datadir="/mnt/md0/phsht/data/AML3D_data"
-MLdir=`pwd`
 
+MLdir=`pwd`
 echo $MLdir
 
 #WFPLOT=$HOME/Projects/MachineLearning/WFplot/WFplot.GF
-WFPLOT=$MLdir"/../WFplot/WFplot.GF"
+WFPLOT=/storage/disqs/MachineLearning-Anderson/WFplot/WFplot.GF
+#WFPLOT=$MLdir"/../WFplot/WFplot.GF"
 #WFPLOT=/media/phsht/DataDrive/MachineLearning/Anderson/WFplot/WFplot.GF
 
 # copy the original data files
