@@ -55,10 +55,12 @@ do
     #bunzip2 -f *$size*.bz2
     find . -name "*.raw.bz2" | parallel -I% --max-args 1 bunzip2 %
 
-#    for evec in Evec*.raw
-#    do
-#	echo $evec
-#	echo -ne "$evec\n$color\n$frame" | $WFPLOT
+    for evec in Evec*.raw
+    do
+	echo $evec
+	echo -ne "$evec\n$color\n$frame" | $WFPLOT
+    done
+
 #	if [ $imgsize -lt 1 ]
 #	then
 #	    convert $evec.eps `basename $evec .raw.eps`.$type
@@ -66,17 +68,19 @@ do
 #	    convert -resize $imgsize"x"$imgsize\! $evec.eps `basename $evec .raw.eps`.$type
 #	fi
 
-    find . -name "*.raw" | parallel -I% --max-args 1 (echo -ne "%\n$color\n$frame" | $WFPLOT)
+#    find . -name "*.raw" | parallel -I% --max-args 1 (echo -ne "%\n$color\n$frame" | $WFPLOT)
 
     if [ $imgsize -lt 1 ]
     then
-	find . -name "*.raw.eps" | parallel -I% --max-args 1 convert % `basename %.raw.eps`.$type
+	find . -name "*.raw.eps" | parallel -I% --max-args 1 convert % `basename % .eps`.$type
     else
-    	find . -name "*.raw.eps" | parallel -I% --max-args 1 -resize $imgsize"x"$imgsize\! %.eps `basename %.raw.eps`.$type
+    	find . -name "*.raw.eps" | parallel -I% --max-args 1 convert -resize $imgsize"x"$imgsize\! % `basename % .eps`.$type
     fi
+    rename .raw.eps.jpg .jpg *.jpg
 
 #    rm -f $evec.eps $evec
-    find . -name "*.raw*" | parallel -I% --max-args 1 rm -f %
+    find . -name "*.raw.eps" | parallel -I% --max-args 1 rm -f %
+    find . -name "*.raw" | parallel -I% --max-args 1 rm -f %
 
 #    done
     cd ..
